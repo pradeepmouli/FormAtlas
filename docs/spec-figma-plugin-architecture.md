@@ -187,3 +187,51 @@ Progress reporting:
 - Multi-bundle import flow builder
 - Auto Layout conversion pass (optional)
 - Componentization pass (optional)
+---
+
+## 14. Implementation Notes
+
+> Actual source layout as shipped (compare to §4 above).
+
+```
+tools/figma-importer/
+├─ package.json          ← Vitest, TypeScript, Vite
+├─ tsconfig.json
+├─ vite.config.ts        ← dual-entry build (main + ui)
+├─ src/
+│  ├─ main.ts            ← worker entry
+│  ├─ ui.ts              ← UI entry
+│  ├─ protocol.ts        ← discriminated-union message types
+│  ├─ domain/
+│  │  ├─ types.ts        ← UiDumpBundle, UiNode, DevExpressMetadata, ...
+│  │  ├─ schema.ts       ← parseBundle(), isCompatible(), countNodes()
+│  │  └─ normalize.ts    ← normalizeNodes(), layerName(), countAll()
+│  ├─ import/
+│  │  ├─ importer.ts     ← importBundle() orchestrator
+│  │  ├─ options.ts      ← ImportOptions re-export
+│  │  ├─ screenshot.ts   ← insertScreenshot() → locked IMAGE fill
+│  │  ├─ layerNaming.ts  ← getLayerName(), getFormFrameName()
+│  │  └─ zOrder.ts       ← sortByZOrder()
+│  ├─ render/
+│  │  ├─ renderNode.ts   ← renderNode() recursive renderer
+│  │  ├─ primitives.ts   ← createNodeFrame(), createPlaceholderRect()
+│  │  └─ devexpress/
+│  │     ├─ registry.ts  ← DevExpressRendererRegistry
+│  │     ├─ grid.ts, pivot.ts, tabs.ts, layout.ts, ribbon.ts
+│  └─ perf/
+│     └─ budget.ts       ← prune() with maxDepth/skipInvisible/minSize
+└─ tests/
+   ├─ protocol.test.ts
+   ├─ parser.test.ts
+   ├─ normalize.test.ts
+   ├─ render-devexpress.test.ts
+   ├─ performance-options.test.ts
+   └─ local-only.test.ts
+```
+
+### Key deviations from §4 spec layout
+
+- `perf/telemetry.ts` not yet implemented (local timing logs).
+- `render/styles.ts` and `render/constraints.ts` not yet implemented (styling/constraint mapping is deferred to a later iteration).
+- `domain/warnings.ts` — warnings use the `Warning` interface in `protocol.ts` directly.
+- Placement logic is inlined in `importer.ts` rather than a separate `placement.ts`.

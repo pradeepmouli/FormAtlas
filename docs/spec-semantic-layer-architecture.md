@@ -175,3 +175,87 @@ Semantic output can drive code-gen templates:
 - i18n keyword sets
 - Accessibility property utilization where available
 - Learned model augmentation (optional; keep rule-based core)
+---
+
+## 12. Implementation Reference
+
+> Shipped implementation lives in `semantic/FormAtlas.Semantic/`.
+
+### 12.1 Source layout
+
+| Concern | File |
+|---------|------|
+| CLI entry point | `semantic/FormAtlas.Semantic/Program.cs` |
+| Semantic bundle models | `semantic/FormAtlas.Semantic/Contracts/SemanticBundleModels.cs` |
+| Schema validator | `semantic/FormAtlas.Semantic/Validation/SemanticSchemaValidator.cs` |
+| Bundle reader | `semantic/FormAtlas.Semantic/IO/UiDumpBundleReader.cs` |
+| Semantic writer | `semantic/FormAtlas.Semantic/IO/SemanticBundleWriter.cs` |
+| Normalization | `semantic/FormAtlas.Semantic/Normalization/FeatureNormalizer.cs` |
+| Type-based classifier | `semantic/FormAtlas.Semantic/Inference/TypeRoleClassifier.cs` |
+| Heuristic scorer | `semantic/FormAtlas.Semantic/Inference/HeuristicRoleScorer.cs` |
+| Region/pattern detector | `semantic/FormAtlas.Semantic/Inference/RegionPatternDetector.cs` |
+
+### 12.2 Pipeline stages
+
+```
+form.json
+   │
+   ▼
+UiDumpBundleReader        (validates + deserialises)
+   │
+   ▼
+FeatureNormalizer          (flattens tree, computes absolute bounds)
+   │
+   ▼
+TypeRoleClassifier         (maps .NET type / devexpress.kind → role + confidence)
+   │
+   ▼
+HeuristicRoleScorer        (augments evidence with text / layout signals)
+   │
+   ▼
+RegionPatternDetector      (emits ActionBar, ContentArea, PrimarySecondaryActions)
+   │
+   ▼
+SemanticBundleWriter       → semantic.json
+```
+
+### 12.3 CLI usage
+
+```bash
+dotnet run --project semantic/FormAtlas.Semantic -- \
+  path/to/form.json [output-directory]
+```
+
+### 12.4 Role map (shipped)
+
+**WinForms types** (short name match):
+
+| Type | Role | Confidence |
+|------|------|-----------|
+| `Button` | `Action` | 0.95 |
+| `TextBox` | `InputField` | 0.95 |
+| `Label` | `Label` | 0.90 |
+| `ComboBox` | `SelectField` | 0.90 |
+| `CheckBox` / `RadioButton` | `ToggleField` | 0.85–0.90 |
+| `DataGridView` | `DataGrid` | 0.95 |
+| `TabControl` | `TabContainer` | 0.90 |
+| `Form` | `FormRoot` | 0.99 |
+
+**DevExpress kinds**:
+
+| Kind | Role | Confidence |
+|------|------|-----------|
+| `GridControl` | `DataGrid` | 0.95 |
+| `PivotGridControl` | `PivotTable` | 0.95 |
+| `XtraTabControl` | `TabContainer` | 0.95 |
+| `LayoutControl` | `LayoutContainer` | 0.90 |
+| `RibbonControl` | `Ribbon` | 0.95 |
+| `BarManager` | `Toolbar` | 0.90 |
+
+### 12.5 Tests
+
+```bash
+dotnet test tests/FormAtlas.Semantic.Tests/FormAtlas.Semantic.Tests.csproj
+```
+
+32 tests covering normalization, role inference, confidence/evidence traceability, and pattern detection.

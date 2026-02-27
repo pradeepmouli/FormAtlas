@@ -263,3 +263,77 @@ Schema lives at: `docs/ui-dump.schema.json`
 - Add external-mode sidecar (UIA + screenshot) for non-instrumented apps
 - Add diff tool for comparing two dumps
 - Add optional "semantic roles" inferred from control types and text
+---
+
+## 14. Implementation Reference
+
+> These notes describe the shipped implementation (`src/FormAtlas.Tool/`). They supplement the spec above with concrete class names, file locations, and behavioral notes discovered during implementation.
+
+### 14.1 Source layout
+
+| Concern | Location |
+|---------|----------|
+| Agent lifecycle | `src/FormAtlas.Tool/Agent/UiDumpAgent.cs` |
+| Agent options | `src/FormAtlas.Tool/Agent/UiDumpOptions.cs` |
+| Control traversal | `src/FormAtlas.Tool/Exporter/ControlWalker.cs` |
+| Node mapping | `src/FormAtlas.Tool/Exporter/UiNodeMapper.cs` |
+| Bundle orchestration | `src/FormAtlas.Tool/Exporter/DumpCoordinator.cs` |
+| Screenshot capture | `src/FormAtlas.Tool/Exporter/ScreenshotCaptureService.cs` |
+| Bundle writer | `src/FormAtlas.Tool/Exporter/UiDumpBundleWriter.cs` |
+| DevExpress base | `src/FormAtlas.Tool/Metadata/DevExpressReflection.cs` |
+| Adapter registry | `src/FormAtlas.Tool/Metadata/AdapterRegistry.cs` |
+| Grid adapter | `src/FormAtlas.Tool/Metadata/Adapters/GridControlAdapter.cs` |
+| PivotGrid adapter | `src/FormAtlas.Tool/Metadata/Adapters/PivotGridControlAdapter.cs` |
+| Tab adapter | `src/FormAtlas.Tool/Metadata/Adapters/XtraTabControlAdapter.cs` |
+| Layout adapter | `src/FormAtlas.Tool/Metadata/Adapters/LayoutControlAdapter.cs` |
+| Ribbon adapter | `src/FormAtlas.Tool/Metadata/Adapters/RibbonBarAdapter.cs` |
+| Contract models | `src/FormAtlas.Tool/Contracts/UiDumpBundleModels.cs` |
+| Version policy | `src/FormAtlas.Tool/Contracts/SchemaVersionPolicy.cs` |
+| Schema validation | `src/FormAtlas.Tool/Validation/SchemaValidator.cs` |
+| Deterministic order | `src/FormAtlas.Tool/Core/DeterministicOrdering.cs` |
+| Warnings model | `src/FormAtlas.Tool/Core/PipelineWarnings.cs` |
+| Sample host | `src/FormAtlas.Tool.SampleHost/Program.cs` |
+
+### 14.2 API quickstart
+
+```csharp
+using FormAtlas.Tool.Agent;
+
+using var agent = new UiDumpAgent(new UiDumpOptions
+{
+    OutputDirectory = @"C:\Temp\Bundles",
+    CaptureScreenshot = true,
+    ExtractDevExpressMetadata = true
+});
+
+// Wire up an optional callback to know when a dump fires
+agent.DumpRequested += (_, formName) =>
+    Console.WriteLine($"Dumping: {formName}");
+
+agent.Start();   // idempotent
+// ...
+agent.Stop();    // idempotent; also called by Dispose()
+```
+
+### 14.3 Version compatibility
+
+`SchemaVersionPolicy` implements MAJOR.MINOR rules:
+
+- Same MAJOR → compatible (MINOR is additive)
+- Higher MAJOR → incompatible by default
+- `allowHigherMajor: true` overrides for permissive consumers
+
+```csharp
+SchemaVersionPolicy.IsCompatible("1.5")   // true  (same major, higher minor)
+SchemaVersionPolicy.IsCompatible("2.0")   // false (higher major)
+SchemaVersionPolicy.Validate("1.0")        // no-op; throws on mismatch
+```
+
+### 14.4 Schema validation
+
+```csharp
+var validator = SchemaValidator.LoadFromFile("docs/ui-dump.schema.json");
+var errors = validator.Validate(jsonText);  // empty list = valid
+```
+
+Uses **JsonSchema.Net 7.2.1** (JSON Schema Draft 2020-12) — required for `$defs` resolution support.

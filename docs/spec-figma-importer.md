@@ -236,3 +236,77 @@ If unsupported schema:
 - Auto Layout conversion heuristics (optional)
 - Componentization suggestions (button styles, inputs)
 - Diff view: import two dumps and highlight layout differences
+---
+
+## 13. Implementation Reference
+
+> These notes describe the shipped TypeScript implementation (`tools/figma-importer/src/`).
+
+### 13.1 Source layout
+
+| Concern | File |
+|---------|------|
+| Worker entry point | `src/main.ts` |
+| UI entry point | `src/ui.ts` |
+| Protocol types | `src/protocol.ts` |
+| Domain types | `src/domain/types.ts` |
+| Bundle parser & compat | `src/domain/schema.ts` |
+| Deterministic normalization | `src/domain/normalize.ts` |
+| Import orchestrator | `src/import/importer.ts` |
+| Import options | `src/import/options.ts` |
+| Screenshot insertion | `src/import/screenshot.ts` |
+| Layer naming | `src/import/layerNaming.ts` |
+| Z-order sorting | `src/import/zOrder.ts` |
+| Performance budget | `src/perf/budget.ts` |
+| Generic node renderer | `src/render/renderNode.ts` |
+| Rendering primitives | `src/render/primitives.ts` |
+| DevExpress registry | `src/render/devexpress/registry.ts` |
+| Grid renderer | `src/render/devexpress/grid.ts` |
+| PivotGrid renderer | `src/render/devexpress/pivot.ts` |
+| Tabs renderer | `src/render/devexpress/tabs.ts` |
+| Layout renderer | `src/render/devexpress/layout.ts` |
+| Ribbon renderer | `src/render/devexpress/ribbon.ts` |
+
+### 13.2 Plugin protocol
+
+Messages are discriminated-union objects exchanged between the UI iframe and the plugin worker:
+
+```ts
+// UI → Worker
+{ type: "VALIDATE_REQUEST", jsonText: string }
+{ type: "IMPORT_REQUEST", jsonText: string, pngBytes?: Uint8Array, options: ImportOptions }
+
+// Worker → UI
+{ type: "VALIDATE_RESULT", ok: boolean, form?, counts?, warnings[], error? }
+{ type: "IMPORT_PROGRESS", phase: string, done: number, total: number }
+{ type: "IMPORT_RESULT", ok: boolean, createdNodeIds?, warnings[], error? }
+```
+
+### 13.3 Schema compat check
+
+```ts
+import { isCompatible } from "./domain/schema";
+
+isCompatible("1.0")   // true
+isCompatible("1.9")   // true  (same MAJOR)
+isCompatible("2.0")   // false (higher MAJOR — rejected by default)
+isCompatible("2.0", /* allowHigherMajor */ true)  // true
+```
+
+### 13.4 Performance budget
+
+```ts
+import { prune } from "./perf/budget";
+
+const pruned = prune(nodes, {
+  maxDepth: 10,      // skip nodes deeper than 10 levels
+  skipInvisible: true,
+  minSize: 4,        // skip nodes smaller than 4×4 px
+});
+```
+
+### 13.5 Tests
+
+Run with: `cd tools/figma-importer && npm test` (uses Vitest).
+
+Test files live in `tools/figma-importer/tests/`.
