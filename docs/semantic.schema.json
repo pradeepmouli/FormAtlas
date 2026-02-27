@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/semantic.schema.json",
+  "title": "UiDump Semantic Bundle",
+  "type": "object",
+  "required": ["semanticVersion", "sourceSchemaVersion", "form", "annotations"],
+  "properties": {
+    "semanticVersion": { "type": "string" },
+    "sourceSchemaVersion": { "type": "string" },
+
+    "form": {
+      "type": "object",
+      "required": ["name", "type", "width", "height"],
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "dpi": { "type": ["integer", "null"] }
+      },
+      "additionalProperties": true
+    },
+
+    "annotations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/annotation" }
+    },
+
+    "regions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/region" }
+    },
+
+    "patterns": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/pattern" }
+    },
+
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+
+  "$defs": {
+    "role": {
+      "type": "object",
+      "required": ["role", "confidence"],
+      "properties": {
+        "role": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "annotation": {
+      "type": "object",
+      "required": ["nodeId", "roles"],
+      "properties": {
+        "nodeId": { "type": "string" },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/role" }
+        },
+        "hints": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "rect": {
+      "type": "object",
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "w": { "type": "number" },
+        "h": { "type": "number" }
+      }
+    },
+
+    "region": {
+      "type": "object",
+      "required": ["name", "bounds"],
+      "properties": {
+        "name": { "type": "string" },
+        "bounds": { "$ref": "#/$defs/rect" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "nodeIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "pattern": {
+      "type": "object",
+      "required": ["name", "confidence"],
+      "properties": {
+        "name": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "nodeIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

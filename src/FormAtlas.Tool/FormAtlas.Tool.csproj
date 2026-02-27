@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net478</TargetFramework>
-    <PackageId>WinFormsFigma.Tool</PackageId>
+    <TargetFrameworks>netstandard2.0;net478</TargetFrameworks>
+    <PackageId>FormAtlas.Tool</PackageId>
     <Version>0.1.0</Version>
     <Authors>pmouli</Authors>
-    <Description>WinFormsFigma reusable .NET Framework 4.7.8 library.</Description>
+    <Description>FormAtlas reusable .NET Framework 4.7.8 library.</Description>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net478'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
 

@@ -1,0 +1,12 @@
+{
+  "name": "FormAtlas .NET Dev",
+  "image": "mcr.microsoft.com/dotnet/sdk:9.0",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp"
+      ]
+    }
+  },
+  "postCreateCommand": "dotnet restore ./FormAtlas.sln"
+}

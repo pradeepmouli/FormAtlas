@@ -1,0 +1,401 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://example.local/ui-dump.schema.json",
+	"title": "FormAtlas Bundle",
+	"type": "object",
+	"required": [
+		"schemaVersion",
+		"form",
+		"nodes"
+	],
+	"properties": {
+		"schemaVersion": {
+			"type": "string"
+		},
+		"screenshot": {
+			"type": [
+				"string",
+				"null"
+			]
+		},
+		"form": {
+			"type": "object",
+			"required": [
+				"name",
+				"type",
+				"width",
+				"height"
+			],
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"width": {
+					"type": "integer"
+				},
+				"height": {
+					"type": "integer"
+				},
+				"dpi": {
+					"type": [
+						"integer",
+						"null"
+					]
+				}
+			}
+		},
+		"nodes": {
+			"type": "array",
+			"items": {
+				"$ref": "#/$defs/node"
+			}
+		}
+	},
+	"$defs": {
+		"rect": {
+			"type": "object",
+			"required": [
+				"x",
+				"y",
+				"w",
+				"h"
+			],
+			"properties": {
+				"x": {
+					"type": "integer"
+				},
+				"y": {
+					"type": "integer"
+				},
+				"w": {
+					"type": "integer"
+				},
+				"h": {
+					"type": "integer"
+				}
+			}
+		},
+		"node": {
+			"type": "object",
+			"required": [
+				"id",
+				"type",
+				"name",
+				"bounds",
+				"children"
+			],
+			"properties": {
+				"id": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"text": {
+					"type": [
+						"string",
+						"null"
+					]
+				},
+				"visible": {
+					"type": "boolean"
+				},
+				"enabled": {
+					"type": "boolean"
+				},
+				"dock": {
+					"type": [
+						"string",
+						"null"
+					]
+				},
+				"anchor": {
+					"type": [
+						"string",
+						"null"
+					]
+				},
+				"zIndex": {
+					"type": "integer"
+				},
+				"bounds": {
+					"$ref": "#/$defs/rect"
+				},
+				"metadata": {
+					"type": [
+						"object",
+						"null"
+					],
+					"properties": {
+						"devexpress": {
+							"type": "object",
+							"required": [
+								"kind"
+							],
+							"properties": {
+								"kind": {
+									"type": "string",
+									"enum": [
+										"GridControl",
+										"PivotGridControl",
+										"XtraTabControl",
+										"LayoutControl",
+										"RibbonControl",
+										"BarManager"
+									]
+								},
+								"grid": {
+									"$ref": "#/$defs/gridMeta"
+								},
+								"pivot": {
+									"$ref": "#/$defs/pivotMeta"
+								},
+								"tabs": {
+									"$ref": "#/$defs/tabMeta"
+								},
+								"layout": {
+									"$ref": "#/$defs/layoutMeta"
+								},
+								"ribbon": {
+									"$ref": "#/$defs/ribbonMeta"
+								}
+							},
+							"additionalProperties": false
+						}
+					},
+					"additionalProperties": true
+				},
+				"children": {
+					"type": "array",
+					"items": {
+						"$ref": "#/$defs/node"
+					}
+				}
+			}
+		},
+		"gridMeta": {
+			"type": "object",
+			"properties": {
+				"viewType": {
+					"type": "string"
+				},
+				"columns": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"caption": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"fieldName": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"visibleIndex": {
+								"type": [
+									"integer",
+									"null"
+								]
+							},
+							"width": {
+								"type": [
+									"integer",
+									"null"
+								]
+							},
+							"groupIndex": {
+								"type": [
+									"integer",
+									"null"
+								]
+							},
+							"sortOrder": {
+								"type": [
+									"string",
+									"null"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"pivotMeta": {
+			"type": "object",
+			"properties": {
+				"fields": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"caption": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"fieldName": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"area": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"areaIndex": {
+								"type": [
+									"integer",
+									"null"
+								]
+							},
+							"visible": {
+								"type": [
+									"boolean",
+									"null"
+								]
+							},
+							"width": {
+								"type": [
+									"integer",
+									"null"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"tabMeta": {
+			"type": "object",
+			"properties": {
+				"selectedIndex": {
+					"type": [
+						"integer",
+						"null"
+					]
+				},
+				"pages": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"text": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"index": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		},
+		"layoutMeta": {
+			"type": "object",
+			"properties": {
+				"groups": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"caption": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"items": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"controlName": {
+											"type": [
+												"string",
+												"null"
+											]
+										},
+										"label": {
+											"type": [
+												"string",
+												"null"
+											]
+										},
+										"bounds": {
+											"$ref": "#/$defs/rect"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"ribbonMeta": {
+			"type": "object",
+			"properties": {
+				"pages": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"caption": {
+								"type": [
+									"string",
+									"null"
+								]
+							},
+							"groups": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"caption": {
+											"type": [
+												"string",
+												"null"
+											]
+										},
+										"items": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"caption": {
+														"type": [
+															"string",
+															"null"
+														]
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

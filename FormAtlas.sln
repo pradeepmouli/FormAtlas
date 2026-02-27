@@ -5,9 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFigma.Tool", "src\WinFormsFigma.Tool\WinFormsFigma.Tool.csproj", "{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFigma.Tool.Tests", "tests\WinFormsFigma.Tool.Tests\WinFormsFigma.Tool.Tests.csproj", "{60F20257-7F2B-49D9-9543-2E127FF458B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormAtlas.Tool", "src\FormAtlas.Tool\FormAtlas.Tool.csproj", "{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,24 +29,11 @@ Global
 		{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8}.Release|x64.Build.0 = Release|Any CPU
 		{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8}.Release|x86.ActiveCfg = Release|Any CPU
 		{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8}.Release|x86.Build.0 = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|x64.Build.0 = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Debug|x86.Build.0 = Debug|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|x64.ActiveCfg = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|x64.Build.0 = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|x86.ActiveCfg = Release|Any CPU
-		{60F20257-7F2B-49D9-9543-2E127FF458B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9B1989E9-C10E-43A1-BCC5-42A246EB3EE8} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
-		{60F20257-7F2B-49D9-9543-2E127FF458B9} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal
