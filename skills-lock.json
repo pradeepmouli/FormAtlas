@@ -1,10 +1,40 @@
 {
   "version": 1,
   "skills": {
+    "dotnet-api": {
+      "source": "novotnyllc/dotnet-artisan",
+      "sourceType": "github",
+      "computedHash": "cb898011b8ba3921f84430295ddf82817620ca004eb7374f0c42d855ff453961"
+    },
+    "dotnet-csharp": {
+      "source": "novotnyllc/dotnet-artisan",
+      "sourceType": "github",
+      "computedHash": "2190db8f294197b8463f7f1a6cd995d82b4427e209c68704bdda1718037749f1"
+    },
+    "dotnet-framework-4.8-expert": {
+      "source": "404kidwiz/claude-supercode-skills",
+      "sourceType": "github",
+      "computedHash": "99ec934bc7035d733789afbeed8412c18a2d7971ed2e19793b664dac19fd44db"
+    },
+    "dotnet-testing": {
+      "source": "novotnyllc/dotnet-artisan",
+      "sourceType": "github",
+      "computedHash": "65d44787deea1f9bc913e07614d060968b8dca7f7768206d10ba8b6fc8ed7565"
+    },
+    "dotnet-ui": {
+      "source": "novotnyllc/dotnet-artisan",
+      "sourceType": "github",
+      "computedHash": "21ce1fde620a3929f224b903c18bddb6be42d9a399ea10516bb7b9e6e40669d4"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "computedHash": "6412eb4eb3b91595ebab937f0c69501240e7ba761b3d82510b5cf506ec5c7adc"
+    },
+    "microsoft-docs": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "5a34aa69919e740257743aa6f4dad96916a371dbfe566326161b81ae103599c6"
     }
   }
 }
