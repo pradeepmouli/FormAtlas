@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>FormAtlas.Tool.SampleHost</RootNamespace>
+    <AssemblyName>FormAtlas.Tool.SampleHost</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FormAtlas.Tool\FormAtlas.Tool.csproj" />
+  </ItemGroup>
+
+</Project>

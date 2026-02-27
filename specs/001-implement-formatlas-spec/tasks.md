@@ -17,15 +17,15 @@
 
 **Purpose**: Create baseline project structure for exporter, importer, semantic transformer, and test harnesses.
 
-- [ ] T001 Create feature source folders in `src/FormAtlas.Tool/Agent/`, `src/FormAtlas.Tool/Exporter/`, and `src/FormAtlas.Tool/Metadata/`
-- [ ] T002 [P] Scaffold Figma importer package manifest in `tools/figma-importer/package.json`
-- [ ] T003 [P] Add TypeScript build config for importer in `tools/figma-importer/tsconfig.json`
-- [ ] T004 [P] Add importer bundler config in `tools/figma-importer/vite.config.ts`
-- [ ] T005 Create importer source/test folders under `tools/figma-importer/src/` and `tools/figma-importer/tests/`
-- [ ] T006 Create semantic transformer project file in `semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj`
-- [ ] T007 [P] Create semantic transformer source/test folders in `semantic/FormAtlas.Semantic/` and `tests/FormAtlas.Semantic.Tests/`
-- [ ] T008 Add exporter test project file in `tests/FormAtlas.Tool.Tests/FormAtlas.Tool.Tests.csproj`
-- [ ] T009 [P] Add fixture directories for cross-component tests in `tests/fixtures/ui-dump/`, `tools/figma-importer/fixtures/`, and `tests/fixtures/semantic/`
+- [X] T001 Create feature source folders in `src/FormAtlas.Tool/Agent/`, `src/FormAtlas.Tool/Exporter/`, and `src/FormAtlas.Tool/Metadata/`
+- [X] T002 [P] Scaffold Figma importer package manifest in `tools/figma-importer/package.json`
+- [X] T003 [P] Add TypeScript build config for importer in `tools/figma-importer/tsconfig.json`
+- [X] T004 [P] Add importer bundler config in `tools/figma-importer/vite.config.ts`
+- [X] T005 Create importer source/test folders under `tools/figma-importer/src/` and `tools/figma-importer/tests/`
+- [X] T006 Create semantic transformer project file in `semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj`
+- [X] T007 [P] Create semantic transformer source/test folders in `semantic/FormAtlas.Semantic/` and `tests/FormAtlas.Semantic.Tests/`
+- [X] T008 Add exporter test project file in `tests/FormAtlas.Tool.Tests/FormAtlas.Tool.Tests.csproj`
+- [X] T009 [P] Add fixture directories for cross-component tests in `tests/fixtures/ui-dump/`, `tools/figma-importer/fixtures/`, and `tests/fixtures/semantic/`
 
 ---
 
@@ -35,15 +35,15 @@
 
 **⚠️ CRITICAL**: No user story implementation starts before this phase completes.
 
-- [ ] T010 Implement shared bundle contract models in `src/FormAtlas.Tool/Contracts/UiDumpBundleModels.cs`
-- [ ] T011 [P] Implement semantic bundle contract models in `semantic/FormAtlas.Semantic/Contracts/SemanticBundleModels.cs`
-- [ ] T012 [P] Add schema loading/validation utility for exporter in `src/FormAtlas.Tool/Validation/SchemaValidator.cs`
-- [ ] T013 [P] Add schema loading/validation utility for semantic transformer in `semantic/FormAtlas.Semantic/Validation/SemanticSchemaValidator.cs`
-- [ ] T014 Implement deterministic ordering and ID sequencing helpers in `src/FormAtlas.Tool/Core/DeterministicOrdering.cs`
-- [ ] T015 [P] Implement warning/error envelope model shared by pipelines in `src/FormAtlas.Tool/Core/PipelineWarnings.cs`
-- [ ] T016 [P] Implement interop version compatibility policy in `src/FormAtlas.Tool/Contracts/SchemaVersionPolicy.cs`
-- [ ] T017 Implement exporter fixture schema-validation tests in `tests/FormAtlas.Tool.Tests/Contract/UiDumpSchemaContractTests.cs`
-- [ ] T018 [P] Implement semantic schema-validation tests in `tests/FormAtlas.Semantic.Tests/Contract/SemanticSchemaContractTests.cs`
+- [X] T010 Implement shared bundle contract models in `src/FormAtlas.Tool/Contracts/UiDumpBundleModels.cs`
+- [X] T011 [P] Implement semantic bundle contract models in `semantic/FormAtlas.Semantic/Contracts/SemanticBundleModels.cs`
+- [X] T012 [P] Add schema loading/validation utility for exporter in `src/FormAtlas.Tool/Validation/SchemaValidator.cs`
+- [X] T013 [P] Add schema loading/validation utility for semantic transformer in `semantic/FormAtlas.Semantic/Validation/SemanticSchemaValidator.cs`
+- [X] T014 Implement deterministic ordering and ID sequencing helpers in `src/FormAtlas.Tool/Core/DeterministicOrdering.cs`
+- [X] T015 [P] Implement warning/error envelope model shared by pipelines in `src/FormAtlas.Tool/Core/PipelineWarnings.cs`
+- [X] T016 [P] Implement interop version compatibility policy in `src/FormAtlas.Tool/Contracts/SchemaVersionPolicy.cs`
+- [X] T017 Implement exporter fixture schema-validation tests in `tests/FormAtlas.Tool.Tests/Contract/UiDumpSchemaContractTests.cs`
+- [X] T018 [P] Implement semantic schema-validation tests in `tests/FormAtlas.Semantic.Tests/Contract/SemanticSchemaContractTests.cs`
 
 **Checkpoint**: Contract validation, version policy, and determinism primitives are ready.
 
@@ -57,29 +57,29 @@
 
 ### Tests for User Story 1
 
-- [ ] T019 [P] [US1] Add idempotent lifecycle tests for agent start/stop in `tests/FormAtlas.Tool.Tests/Agent/UiDumpAgentLifecycleTests.cs`
-- [ ] T020 [P] [US1] Add deterministic traversal and bounds tests in `tests/FormAtlas.Tool.Tests/Exporter/ControlWalkerTests.cs`
-- [ ] T021 [P] [US1] Add screenshot fallback tests in `tests/FormAtlas.Tool.Tests/Exporter/ScreenshotCaptureFallbackTests.cs`
-- [ ] T022 [P] [US1] Add reflection safety tests for missing DevExpress assemblies in `tests/FormAtlas.Tool.Tests/Metadata/DevExpressReflectionSafetyTests.cs`
-- [ ] T023 [US1] Add bundle compatibility tests against `1.x` rules in `tests/FormAtlas.Tool.Tests/Contract/InteropCompatibilityTests.cs`
+- [X] T019 [P] [US1] Add idempotent lifecycle tests for agent start/stop in `tests/FormAtlas.Tool.Tests/Agent/UiDumpAgentLifecycleTests.cs`
+- [X] T020 [P] [US1] Add deterministic traversal and bounds tests in `tests/FormAtlas.Tool.Tests/Exporter/ControlWalkerTests.cs`
+- [X] T021 [P] [US1] Add screenshot fallback tests in `tests/FormAtlas.Tool.Tests/Exporter/ScreenshotCaptureFallbackTests.cs`
+- [X] T022 [P] [US1] Add reflection safety tests for missing DevExpress assemblies in `tests/FormAtlas.Tool.Tests/Metadata/DevExpressReflectionSafetyTests.cs`
+- [X] T023 [US1] Add bundle compatibility tests against `1.x` rules in `tests/FormAtlas.Tool.Tests/Contract/InteropCompatibilityTests.cs`
 
 ### Implementation for User Story 1
 
-- [ ] T024 [US1] Implement `UiDumpOptions` contract in `src/FormAtlas.Tool/Agent/UiDumpOptions.cs`
-- [ ] T025 [US1] Implement idempotent `UiDumpAgent.Start/Stop` in `src/FormAtlas.Tool/Agent/UiDumpAgent.cs`
-- [ ] T026 [US1] Implement dump coordination and form selection in `src/FormAtlas.Tool/Exporter/DumpCoordinator.cs`
-- [ ] T027 [US1] Implement recursive WinForms control traversal in `src/FormAtlas.Tool/Exporter/ControlWalker.cs`
-- [ ] T028 [US1] Implement node mapping for required/optional fields in `src/FormAtlas.Tool/Exporter/UiNodeMapper.cs`
-- [ ] T029 [US1] Implement screenshot capture service with non-fatal fallback in `src/FormAtlas.Tool/Exporter/ScreenshotCaptureService.cs`
-- [ ] T030 [US1] Implement reflection helper abstractions in `src/FormAtlas.Tool/Metadata/DevExpressReflection.cs`
-- [ ] T031 [P] [US1] Implement GridControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/GridControlAdapter.cs`
-- [ ] T032 [P] [US1] Implement PivotGridControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/PivotGridControlAdapter.cs`
-- [ ] T033 [P] [US1] Implement XtraTabControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/XtraTabControlAdapter.cs`
-- [ ] T034 [P] [US1] Implement LayoutControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/LayoutControlAdapter.cs`
-- [ ] T035 [P] [US1] Implement Ribbon/BarManager metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/RibbonBarAdapter.cs`
-- [ ] T036 [US1] Implement metadata adapter registry and guarded execution in `src/FormAtlas.Tool/Metadata/AdapterRegistry.cs`
-- [ ] T037 [US1] Implement bundle writer and schemaVersion emission in `src/FormAtlas.Tool/Exporter/UiDumpBundleWriter.cs`
-- [ ] T038 [US1] Add sample host integration for export trigger in `src/FormAtlas.Tool.SampleHost/Program.cs`
+- [X] T024 [US1] Implement `UiDumpOptions` contract in `src/FormAtlas.Tool/Agent/UiDumpOptions.cs`
+- [X] T025 [US1] Implement idempotent `UiDumpAgent.Start/Stop` in `src/FormAtlas.Tool/Agent/UiDumpAgent.cs`
+- [X] T026 [US1] Implement dump coordination and form selection in `src/FormAtlas.Tool/Exporter/DumpCoordinator.cs`
+- [X] T027 [US1] Implement recursive WinForms control traversal in `src/FormAtlas.Tool/Exporter/ControlWalker.cs`
+- [X] T028 [US1] Implement node mapping for required/optional fields in `src/FormAtlas.Tool/Exporter/UiNodeMapper.cs`
+- [X] T029 [US1] Implement screenshot capture service with non-fatal fallback in `src/FormAtlas.Tool/Exporter/ScreenshotCaptureService.cs`
+- [X] T030 [US1] Implement reflection helper abstractions in `src/FormAtlas.Tool/Metadata/DevExpressReflection.cs`
+- [X] T031 [P] [US1] Implement GridControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/GridControlAdapter.cs`
+- [X] T032 [P] [US1] Implement PivotGridControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/PivotGridControlAdapter.cs`
+- [X] T033 [P] [US1] Implement XtraTabControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/XtraTabControlAdapter.cs`
+- [X] T034 [P] [US1] Implement LayoutControl metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/LayoutControlAdapter.cs`
+- [X] T035 [P] [US1] Implement Ribbon/BarManager metadata adapter in `src/FormAtlas.Tool/Metadata/Adapters/RibbonBarAdapter.cs`
+- [X] T036 [US1] Implement metadata adapter registry and guarded execution in `src/FormAtlas.Tool/Metadata/AdapterRegistry.cs`
+- [X] T037 [US1] Implement bundle writer and schemaVersion emission in `src/FormAtlas.Tool/Exporter/UiDumpBundleWriter.cs`
+- [X] T038 [US1] Add sample host integration for export trigger in `src/FormAtlas.Tool.SampleHost/Program.cs`
 
 **Checkpoint**: User Story 1 is independently functional and testable.
 
@@ -93,31 +93,31 @@
 
 ### Tests for User Story 2
 
-- [ ] T039 [P] [US2] Add protocol validation tests for UI↔worker messages in `tools/figma-importer/tests/protocol.test.ts`
-- [ ] T040 [P] [US2] Add bundle parser/schema routing tests in `tools/figma-importer/tests/parser.test.ts`
-- [ ] T041 [P] [US2] Add node normalization and deterministic ordering tests in `tools/figma-importer/tests/normalize.test.ts`
-- [ ] T042 [P] [US2] Add DevExpress renderer tests in `tools/figma-importer/tests/render-devexpress.test.ts`
-- [ ] T043 [US2] Add large-node performance options tests in `tools/figma-importer/tests/performance-options.test.ts`
+- [X] T039 [P] [US2] Add protocol validation tests for UI↔worker messages in `tools/figma-importer/tests/protocol.test.ts`
+- [X] T040 [P] [US2] Add bundle parser/schema routing tests in `tools/figma-importer/tests/parser.test.ts`
+- [X] T041 [P] [US2] Add node normalization and deterministic ordering tests in `tools/figma-importer/tests/normalize.test.ts`
+- [X] T042 [P] [US2] Add DevExpress renderer tests in `tools/figma-importer/tests/render-devexpress.test.ts`
+- [X] T043 [US2] Add large-node performance options tests in `tools/figma-importer/tests/performance-options.test.ts`
 
 ### Implementation for User Story 2
 
-- [ ] T044 [US2] Implement typed UI↔worker protocol definitions in `tools/figma-importer/src/protocol.ts`
-- [ ] T045 [US2] Implement importer option models and defaults in `tools/figma-importer/src/import/options.ts`
-- [ ] T046 [US2] Implement bundle domain types and schema-version router in `tools/figma-importer/src/domain/types.ts` and `tools/figma-importer/src/domain/schema.ts`
-- [ ] T047 [US2] Implement deterministic normalization pipeline in `tools/figma-importer/src/domain/normalize.ts`
-- [ ] T048 [US2] Implement plugin worker entry flow in `tools/figma-importer/src/main.ts`
-- [ ] T049 [US2] Implement plugin UI entry and request wiring in `tools/figma-importer/src/ui.ts`
-- [ ] T050 [US2] Implement top-level importer orchestration in `tools/figma-importer/src/import/importer.ts`
-- [ ] T051 [US2] Implement screenshot ingestion/locking behavior in `tools/figma-importer/src/import/screenshot.ts`
-- [ ] T052 [US2] Implement generic node rendering primitives in `tools/figma-importer/src/render/primitives.ts` and `tools/figma-importer/src/render/renderNode.ts`
-- [ ] T053 [US2] Implement layer naming and z-order policy in `tools/figma-importer/src/import/layerNaming.ts` and `tools/figma-importer/src/import/zOrder.ts`
-- [ ] T054 [US2] Implement DevExpress renderer registry in `tools/figma-importer/src/render/devexpress/registry.ts`
-- [ ] T055 [P] [US2] Implement GridControl smart renderer in `tools/figma-importer/src/render/devexpress/grid.ts`
-- [ ] T056 [P] [US2] Implement PivotGridControl smart renderer in `tools/figma-importer/src/render/devexpress/pivot.ts`
-- [ ] T057 [P] [US2] Implement XtraTabControl smart renderer in `tools/figma-importer/src/render/devexpress/tabs.ts`
-- [ ] T058 [P] [US2] Implement LayoutControl smart renderer in `tools/figma-importer/src/render/devexpress/layout.ts`
-- [ ] T059 [P] [US2] Implement Ribbon/BarManager smart renderer in `tools/figma-importer/src/render/devexpress/ribbon.ts`
-- [ ] T060 [US2] Implement performance budget/pruning controls in `tools/figma-importer/src/perf/budget.ts`
+- [X] T044 [US2] Implement typed UI↔worker protocol definitions in `tools/figma-importer/src/protocol.ts`
+- [X] T045 [US2] Implement importer option models and defaults in `tools/figma-importer/src/import/options.ts`
+- [X] T046 [US2] Implement bundle domain types and schema-version router in `tools/figma-importer/src/domain/types.ts` and `tools/figma-importer/src/domain/schema.ts`
+- [X] T047 [US2] Implement deterministic normalization pipeline in `tools/figma-importer/src/domain/normalize.ts`
+- [X] T048 [US2] Implement plugin worker entry flow in `tools/figma-importer/src/main.ts`
+- [X] T049 [US2] Implement plugin UI entry and request wiring in `tools/figma-importer/src/ui.ts`
+- [X] T050 [US2] Implement top-level importer orchestration in `tools/figma-importer/src/import/importer.ts`
+- [X] T051 [US2] Implement screenshot ingestion/locking behavior in `tools/figma-importer/src/import/screenshot.ts`
+- [X] T052 [US2] Implement generic node rendering primitives in `tools/figma-importer/src/render/primitives.ts` and `tools/figma-importer/src/render/renderNode.ts`
+- [X] T053 [US2] Implement layer naming and z-order policy in `tools/figma-importer/src/import/layerNaming.ts` and `tools/figma-importer/src/import/zOrder.ts`
+- [X] T054 [US2] Implement DevExpress renderer registry in `tools/figma-importer/src/render/devexpress/registry.ts`
+- [X] T055 [P] [US2] Implement GridControl smart renderer in `tools/figma-importer/src/render/devexpress/grid.ts`
+- [X] T056 [P] [US2] Implement PivotGridControl smart renderer in `tools/figma-importer/src/render/devexpress/pivot.ts`
+- [X] T057 [P] [US2] Implement XtraTabControl smart renderer in `tools/figma-importer/src/render/devexpress/tabs.ts`
+- [X] T058 [P] [US2] Implement LayoutControl smart renderer in `tools/figma-importer/src/render/devexpress/layout.ts`
+- [X] T059 [P] [US2] Implement Ribbon/BarManager smart renderer in `tools/figma-importer/src/render/devexpress/ribbon.ts`
+- [X] T060 [US2] Implement performance budget/pruning controls in `tools/figma-importer/src/perf/budget.ts`
 
 **Checkpoint**: User Story 2 is independently functional and testable.
 
@@ -131,20 +131,20 @@
 
 ### Tests for User Story 3
 
-- [ ] T061 [P] [US3] Add semantic pipeline normalization tests in `tests/FormAtlas.Semantic.Tests/Normalization/NormalizationTests.cs`
-- [ ] T062 [P] [US3] Add role inference tests for WinForms and DevExpress types in `tests/FormAtlas.Semantic.Tests/Inference/RoleInferenceTests.cs`
-- [ ] T063 [P] [US3] Add confidence/evidence traceability tests in `tests/FormAtlas.Semantic.Tests/Inference/ConfidenceEvidenceTests.cs`
-- [ ] T064 [US3] Add region/pattern detection tests in `tests/FormAtlas.Semantic.Tests/Inference/PatternDetectionTests.cs`
+- [X] T061 [P] [US3] Add semantic pipeline normalization tests in `tests/FormAtlas.Semantic.Tests/Normalization/NormalizationTests.cs`
+- [X] T062 [P] [US3] Add role inference tests for WinForms and DevExpress types in `tests/FormAtlas.Semantic.Tests/Inference/RoleInferenceTests.cs`
+- [X] T063 [P] [US3] Add confidence/evidence traceability tests in `tests/FormAtlas.Semantic.Tests/Inference/ConfidenceEvidenceTests.cs`
+- [X] T064 [US3] Add region/pattern detection tests in `tests/FormAtlas.Semantic.Tests/Inference/PatternDetectionTests.cs`
 
 ### Implementation for User Story 3
 
-- [ ] T065 [US3] Implement semantic transformer CLI entry in `semantic/FormAtlas.Semantic/Program.cs`
-- [ ] T066 [US3] Implement source bundle reader and validation in `semantic/FormAtlas.Semantic/IO/UiDumpBundleReader.cs`
-- [ ] T067 [US3] Implement absolute-bounds and feature normalization in `semantic/FormAtlas.Semantic/Normalization/FeatureNormalizer.cs`
-- [ ] T068 [US3] Implement type-based role classification in `semantic/FormAtlas.Semantic/Inference/TypeRoleClassifier.cs`
-- [ ] T069 [US3] Implement text/layout heuristics and confidence scoring in `semantic/FormAtlas.Semantic/Inference/HeuristicRoleScorer.cs`
-- [ ] T070 [US3] Implement region and pattern detection in `semantic/FormAtlas.Semantic/Inference/RegionPatternDetector.cs`
-- [ ] T071 [US3] Implement semantic bundle writer in `semantic/FormAtlas.Semantic/IO/SemanticBundleWriter.cs`
+- [X] T065 [US3] Implement semantic transformer CLI entry in `semantic/FormAtlas.Semantic/Program.cs`
+- [X] T066 [US3] Implement source bundle reader and validation in `semantic/FormAtlas.Semantic/IO/UiDumpBundleReader.cs`
+- [X] T067 [US3] Implement absolute-bounds and feature normalization in `semantic/FormAtlas.Semantic/Normalization/FeatureNormalizer.cs`
+- [X] T068 [US3] Implement type-based role classification in `semantic/FormAtlas.Semantic/Inference/TypeRoleClassifier.cs`
+- [X] T069 [US3] Implement text/layout heuristics and confidence scoring in `semantic/FormAtlas.Semantic/Inference/HeuristicRoleScorer.cs`
+- [X] T070 [US3] Implement region and pattern detection in `semantic/FormAtlas.Semantic/Inference/RegionPatternDetector.cs`
+- [X] T071 [US3] Implement semantic bundle writer in `semantic/FormAtlas.Semantic/IO/SemanticBundleWriter.cs`
 
 **Checkpoint**: User Story 3 is independently functional and testable.
 
@@ -154,13 +154,13 @@
 
 **Purpose**: Final contract hardening, documentation alignment, and end-to-end validation.
 
-- [ ] T072 [P] Add end-to-end fixture pipeline validation tests in `tests/Integration/FormAtlasPipelineIntegrationTests.cs`
-- [ ] T073 [P] Update runtime/export usage docs in `README.md` and `docs/spec-ui-export-structure.md`
-- [ ] T074 [P] Update importer usage and protocol docs in `docs/spec-figma-importer.md` and `docs/spec-figma-plugin-architecture.md`
-- [ ] T075 [P] Update semantic and interop docs in `docs/spec-semantic-layer-architecture.md` and `docs/spec-interop-contract.md`
-- [ ] T076 Run quickstart validation scenarios from `specs/001-implement-formatlas-spec/quickstart.md` and capture results in `specs/001-implement-formatlas-spec/quickstart-validation.md`
-- [ ] T077 [P] Add local-only/network-prohibition tests for exporter, importer, and semantic tooling in `tests/Integration/LocalOnlyProcessingTests.cs` and `tools/figma-importer/tests/local-only.test.ts`
-- [ ] T078 [P] Add sensitive artifact handling tests and path-boundary validation in `tests/FormAtlas.Tool.Tests/Security/SensitiveArtifactHandlingTests.cs`
+- [X] T072 [P] Add end-to-end fixture pipeline validation tests in `tests/Integration/FormAtlasPipelineIntegrationTests.cs`
+- [X] T073 [P] Update runtime/export usage docs in `README.md` and `docs/spec-ui-export-structure.md`
+- [X] T074 [P] Update importer usage and protocol docs in `docs/spec-figma-importer.md` and `docs/spec-figma-plugin-architecture.md`
+- [X] T075 [P] Update semantic and interop docs in `docs/spec-semantic-layer-architecture.md` and `docs/spec-interop-contract.md`
+- [X] T076 Run quickstart validation scenarios from `specs/001-implement-formatlas-spec/quickstart.md` and capture results in `specs/001-implement-formatlas-spec/quickstart-validation.md`
+- [X] T077 [P] Add local-only/network-prohibition tests for exporter, importer, and semantic tooling in `tests/Integration/LocalOnlyProcessingTests.cs` and `tools/figma-importer/tests/local-only.test.ts`
+- [X] T078 [P] Add sensitive artifact handling tests and path-boundary validation in `tests/FormAtlas.Tool.Tests/Security/SensitiveArtifactHandlingTests.cs`
 
 ---
 

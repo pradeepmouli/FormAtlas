@@ -19,3 +19,9 @@ packages/
 
 ## OS
 .DS_Store
+
+## Node.js / TypeScript
+node_modules/
+dist/
+*.log
+.env*
