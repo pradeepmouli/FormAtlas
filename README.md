@@ -1,6 +1,6 @@
 # FormAtlas
 
-**FormAtlas** is a runtime-to-design pipeline for .NET WinForms applications. It exports the live UI at runtime, imports it into Figma as editable layers, and enriches it with semantic role annotations useful for modernization and design-system work.
+***FormAtlas*** is a runtime-to-design pipeline for .NET WinForms applications. It exports the live UI at runtime, imports it into Figma as editable layers, and enriches it with semantic role annotations useful for modernization and design-system work.
 
 ## Pipeline Overview
 
