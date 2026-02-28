@@ -5,7 +5,7 @@ namespace FormAtlas.Tool.SampleHost
 {
     /// <summary>
     /// Sample host that demonstrates how to integrate UiDumpAgent in a WinForms application.
-    /// On Windows / net478, replace the placeholder form object with an actual Form instance.
+    /// On Windows / net48, replace the placeholder form object with an actual Form instance.
     /// </summary>
     internal class Program
     {

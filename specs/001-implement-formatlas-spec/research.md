@@ -1,8 +1,8 @@
 # Research — FormAtlas Runtime-to-Design Pipeline
 
-## Decision 1: Keep exporter implementation in C# targeting `net478` + `netstandard2.0`
+## Decision 1: Keep exporter implementation in C# targeting `net48` + `netstandard2.0`
 - Decision: Implement runtime capture and bundle serialization in the existing C# project and preserve dual targeting where possible.
-- Rationale: WinForms runtime capture requires .NET Framework compatibility (`net478`) while shared logic can remain reusable through `netstandard2.0`.
+- Rationale: WinForms runtime capture requires .NET Framework compatibility (`net48`) while shared logic can remain reusable through `netstandard2.0`.
 - Alternatives considered:
   - Separate `net48`-only project: rejected due to reduced reuse and extra maintenance overhead.
   - Full migration to newer .NET only: rejected because WinForms host integration requirements center on .NET Framework workloads.
