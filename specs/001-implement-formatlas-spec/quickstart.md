@@ -3,7 +3,7 @@
 ## 1) Prerequisites
 - .NET SDK 9.0+ installed
 - Repository checked out on branch `001-implement-formatlas-spec`
-- Windows environment for runtime WinForms capture validation (`net478` target)
+- Windows environment for runtime WinForms capture validation (`net48` target)
 - Figma Desktop/Web for plugin validation
 
 ## 2) Build baseline library
@@ -13,7 +13,7 @@ dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f netstandard2.0
 
 On Windows for runtime capture features:
 ```bash
-dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f net478
+dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f net48
 ```
 
 ## 3) Export workflow validation (FormAtlas Exporter)

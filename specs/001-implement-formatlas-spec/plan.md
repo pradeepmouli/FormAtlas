@@ -11,8 +11,8 @@ Implement a deterministic, safe, local-only runtime-to-design pipeline: export W
 
 ## Technical Context
 
-**Language/Version**: C# (.NET `net478` + `netstandard2.0`) for agent/core; TypeScript (ES2020+) for Figma importer; JSON Schema Draft 2020-12 for contracts
-**Primary Dependencies**: `System.Windows.Forms`, `Microsoft.NETFramework.ReferenceAssemblies` (net478), reflection APIs, Figma Plugin API, JSON serializer (Newtonsoft.Json preferred for net478 compatibility), TypeScript toolchain (Vite or equivalent)
+**Language/Version**: C# (.NET `net48` + `netstandard2.0`) for agent/core; TypeScript (ES2020+) for Figma importer; JSON Schema Draft 2020-12 for contracts
+**Primary Dependencies**: `System.Windows.Forms`, `Microsoft.NETFramework.ReferenceAssemblies` (net48), reflection APIs, Figma Plugin API, JSON serializer (Newtonsoft.Json preferred for net48 compatibility), TypeScript toolchain (Vite or equivalent)
 **Storage**: Local filesystem bundles (`form.json`, optional `form.png`, `semantic.json`)
 **Testing**: .NET unit tests for traversal/serialization/adapter safety; TypeScript unit tests for parser/normalizer/renderers; fixture-based golden comparisons
 **Target Platform**: Windows runtime for WinForms export, Figma Desktop/Web plugin runtime for import, local developer machines for semantic transformer

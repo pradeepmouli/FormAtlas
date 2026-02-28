@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net478</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <PackageId>FormAtlas.Tool</PackageId>
     <Version>0.1.0</Version>
     <Authors>pmouli</Authors>
-    <Description>FormAtlas reusable .NET Framework 4.7.8 library.</Description>
+    <Description>FormAtlas reusable .NET library targeting .NET Standard 2.0 and .NET Framework 4.8.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -18,7 +18,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net478'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
   </ItemGroup>
 

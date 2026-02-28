@@ -33,7 +33,7 @@ namespace FormAtlas.Tool.Exporter
         private string CaptureCore(object form, string outputPath)
         {
             // Capture is implemented via reflection to avoid compile-time WinForms dependency
-            // on netstandard2.0. On net478, System.Drawing and System.Windows.Forms are available.
+            // on netstandard2.0. On net48, System.Drawing and System.Windows.Forms are available.
             var formType = form.GetType();
 
             var widthProp = formType.GetProperty("Width");

@@ -23,7 +23,7 @@ This plan is designed for Codex execution. It is organized by milestones with co
 
 ---
 
-## Milestone 1 — FormAtlas exporter core (net478)
+## Milestone 1 — FormAtlas exporter core (net48)
 
 ### 1.1 Public API + options
 #### Tasks
@@ -77,7 +77,7 @@ This plan is designed for Codex execution. It is organized by milestones with co
 
 ### 1.5 JSON writer
 #### Tasks
-- Serialize bundle to JSON using a serializer compatible with net478 (e.g., Newtonsoft.Json or System.Text.Json if available).
+- Serialize bundle to JSON using a serializer compatible with net48 (e.g., Newtonsoft.Json or System.Text.Json if available).
 - Ensure output matches `docs/ui-dump.schema.json`.
 
 #### Acceptance criteria
@@ -165,7 +165,7 @@ This plan is designed for Codex execution. It is organized by milestones with co
 
 ---
 
-## Milestone 3 — Sample app (net478)
+## Milestone 3 — Sample app (net48)
 
 ### Tasks
 - Ensure sample app references the FormAtlas exporter agent (`UiDumpAgent`).

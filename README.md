@@ -25,12 +25,12 @@ UiDumpAgent     →     figma-importer      →     FormAtlas.Semantic
 
 - .NET SDK 9.0+
 - Node.js 18+ (for the Figma plugin)
-- Windows environment for live WinForms capture (`net478` target)
+- Windows environment for live WinForms capture (`net48` target)
 
 ## Devcontainer (macOS-friendly)
 
 Reopen the repository in the dev container using `.devcontainer/devcontainer.json`.
-The `netstandard2.0` target compiles on any platform; runtime capture features require `net478` (Windows only).
+The `netstandard2.0` target compiles on any platform; runtime capture features require `net48` (Windows only).
 
 ## Build
 
@@ -43,7 +43,7 @@ dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f netstandard2.0
 ### FormAtlas.Tool (Windows — enables runtime capture)
 
 ```bash
-dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f net478
+dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -f net48
 ```
 
 ### FormAtlas.Semantic CLI
