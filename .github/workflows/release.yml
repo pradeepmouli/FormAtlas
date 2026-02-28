@@ -1,0 +1,148 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  nuget-publish:
+    name: Pack & publish NuGet – FormAtlas.Tool
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore FormAtlas.sln
+
+      - name: Build (Release)
+        run: dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -c Release --no-restore
+
+      - name: Test
+        run: dotnet test tests/FormAtlas.Tool.Tests/ -c Release --no-build
+
+      - name: Pack
+        run: >
+          dotnet pack src/FormAtlas.Tool/FormAtlas.Tool.csproj
+          -c Release --no-build
+          -o ./nupkg
+          /p:PackageVersion=${GITHUB_REF_NAME#v}
+
+      - name: Publish to GitHub Packages
+        run: >
+          dotnet nuget push ./nupkg/*.nupkg
+          --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
+          --api-key ${{ secrets.GITHUB_TOKEN }}
+          --skip-duplicate
+
+      - name: Upload NuGet artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: ./nupkg/*.nupkg
+
+  semantic-publish:
+    name: Publish FormAtlas.Semantic CLI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore FormAtlas.sln
+
+      - name: Publish self-contained CLI (linux-x64)
+        run: >
+          dotnet publish semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj
+          -c Release -r linux-x64 --self-contained true
+          -o ./publish/semantic-linux-x64
+
+      - name: Publish self-contained CLI (win-x64)
+        run: >
+          dotnet publish semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj
+          -c Release -r win-x64 --self-contained true
+          -o ./publish/semantic-win-x64
+
+      - name: Zip CLI artifacts
+        run: |
+          cd ./publish
+          zip -r semantic-linux-x64.zip semantic-linux-x64/
+          zip -r semantic-win-x64.zip semantic-win-x64/
+
+      - name: Upload CLI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: semantic-cli
+          path: ./publish/*.zip
+
+  figma-plugin-build:
+    name: Build Figma importer plugin
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/figma-importer
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: tools/figma-importer/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Zip plugin dist
+        run: |
+          zip -j ../../figma-importer-plugin.zip dist/main.js dist/ui.js
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: figma-importer-plugin
+          path: figma-importer-plugin.zip
+
+  github-release:
+    name: Create GitHub Release
+    needs: [nuget-publish, semantic-publish, figma-plugin-build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./release-artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "FormAtlas ${{ github.ref_name }}"
+          generate_release_notes: true
+          files: |
+            release-artifacts/nupkg/*.nupkg
+            release-artifacts/semantic-cli/*.zip
+            release-artifacts/figma-importer-plugin/figma-importer-plugin.zip

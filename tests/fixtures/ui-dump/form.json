@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "form": {
+    "name": "MainForm",
+    "type": "System.Windows.Forms.Form",
+    "width": 800,
+    "height": 600,
+    "dpi": 96
+  },
+  "nodes": [
+    {
+      "id": "node-0",
+      "type": "System.Windows.Forms.Form",
+      "name": "MainForm",
+      "text": "Main Form",
+      "visible": true,
+      "enabled": true,
+      "dock": "None",
+      "anchor": "Top, Left",
+      "zIndex": 0,
+      "bounds": { "x": 0, "y": 0, "w": 800, "h": 600 },
+      "metadata": null,
+      "children": [
+        {
+          "id": "node-1",
+          "type": "System.Windows.Forms.Button",
+          "name": "btnOK",
+          "text": "OK",
+          "visible": true,
+          "enabled": true,
+          "dock": "None",
+          "anchor": "Bottom, Right",
+          "zIndex": 0,
+          "bounds": { "x": 620, "y": 540, "w": 80, "h": 30 },
+          "metadata": null,
+          "children": []
+        },
+        {
+          "id": "node-2",
+          "type": "System.Windows.Forms.Button",
+          "name": "btnCancel",
+          "text": "Cancel",
+          "visible": true,
+          "enabled": true,
+          "dock": "None",
+          "anchor": "Bottom, Right",
+          "zIndex": 1,
+          "bounds": { "x": 710, "y": 540, "w": 80, "h": 30 },
+          "metadata": null,
+          "children": []
+        },
+        {
+          "id": "node-3",
+          "type": "DevExpress.XtraGrid.GridControl",
+          "name": "gridControl1",
+          "text": null,
+          "visible": true,
+          "enabled": true,
+          "dock": "Fill",
+          "anchor": "Top, Left, Bottom, Right",
+          "zIndex": 2,
+          "bounds": { "x": 0, "y": 0, "w": 800, "h": 530 },
+          "metadata": {
+            "devexpress": {
+              "kind": "GridControl",
+              "grid": {
+                "viewType": "GridView",
+                "columns": [
+                  { "caption": "ID", "fieldName": "Id", "visibleIndex": 0, "width": 80, "groupIndex": null, "sortOrder": null },
+                  { "caption": "Name", "fieldName": "Name", "visibleIndex": 1, "width": 200, "groupIndex": null, "sortOrder": "Asc" }
+                ]
+              }
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
+  "screenshot": null,
+  "errors": []
+}

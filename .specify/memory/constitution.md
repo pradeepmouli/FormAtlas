@@ -63,7 +63,7 @@ application data.
 
 ## Platform & Architecture Constraints
 
-- Source projects MUST maintain compatibility with `netstandard2.0` and `net478` unless
+- Source projects MUST maintain compatibility with `netstandard2.0` and `net48` unless
 	an approved amendment changes supported targets.
 - Runtime capture components MUST remain dependency-light and MUST avoid hard compile-time
 	coupling to optional vendor assemblies such as DevExpress.

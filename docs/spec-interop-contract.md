@@ -339,3 +339,65 @@ This interop contract enables:
 - Design system extraction
 - Automated semantic tagging
 - Snapshot regression testing
+
+---
+
+## 16. Implementation Reference
+
+> This section documents the shipped implementations of each party in the contract.
+
+### 16.1 Producer: FormAtlas.Tool Exporter
+
+**Key classes**
+
+| Class | Responsibility |
+|-------|---------------|
+| `SchemaVersionPolicy` | `IsCompatible(version)` + `Validate(version)` — MAJOR.MINOR rules |
+| `UiDumpBundleModels` | `UiDumpBundle`, `UiNode`, `NodeMetadata`, `FormInfo`, `Rect` contract models |
+| `UiDumpBundleWriter` | Serialises bundle to `form.json` (Newtonsoft.Json, Indented) |
+| `SchemaValidator` | Validates `form.json` against `docs/ui-dump.schema.json` (JsonSchema.Net, Draft 2020-12) |
+
+**Version policy**
+
+```csharp
+// Same MAJOR.MINOR+ → compatible
+SchemaVersionPolicy.IsCompatible("1.0");        // true
+SchemaVersionPolicy.IsCompatible("1.9");        // true  — higher MINOR is additive
+SchemaVersionPolicy.IsCompatible("2.0");        // false — higher MAJOR rejected
+SchemaVersionPolicy.IsCompatible("2.0", allowHigherMajor: true); // true — permissive consumer
+```
+
+### 16.2 Consumer: Figma Importer
+
+**Key functions**
+
+| Export | Responsibility |
+|--------|---------------|
+| `isCompatible(version, allowHigherMajor?)` | Mirrors C# policy in TypeScript |
+| `parseBundle(jsonText)` | Validates required fields, throws with a clear message on failure |
+| `DEFAULT_IMPORT_OPTIONS` | Default `ImportOptions` including `smartDevExpress: true` |
+
+**Unknown fields / unknown kinds**
+
+- The importer uses `JSON.parse` + runtime property access; extra JSON fields are silently ignored (additive compatibility).
+- An unknown `devexpress.kind` causes `DevExpressRendererRegistry.getRenderer()` to return `undefined`; rendering falls through to the generic `createNodeFrame` path — no error, no warning.
+
+### 16.3 Consumer: Semantic Transformer
+
+**Key classes**
+
+| Class | Responsibility |
+|-------|---------------|
+| `SemanticSchemaValidator` | Validates `semantic.json` against `docs/semantic.schema.json` |
+| `UiDumpBundleReader` | Reads + optionally validates `form.json` via `SemanticSchemaValidator` |
+| `FeatureNormalizer` | Flattens UI tree; tolerates missing/null fields |
+| `TypeRoleClassifier` | Unknown types → `Unknown` role with 0.10 confidence; never throws |
+
+### 16.4 Schema files
+
+| Schema | File | Draft |
+|--------|------|-------|
+| UI Dump Bundle | `docs/ui-dump.schema.json` | JSON Schema Draft 2020-12 |
+| Semantic Bundle | `docs/semantic.schema.json` | JSON Schema Draft 2020-12 |
+
+Both schemas use `$defs` for shared sub-types. **JsonSchema.Net 7.2.1** is required for correct `$defs` resolution; NJsonSchema is not supported.
