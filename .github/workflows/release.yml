@@ -25,7 +25,7 @@ jobs:
         run: dotnet restore FormAtlas.sln
 
       - name: Build (Release)
-        run: dotnet build src/FormAtlas.Tool/FormAtlas.Tool.csproj -c Release --no-restore
+        run: dotnet build FormAtlas.sln -c Release --no-restore
 
       - name: Test
         run: dotnet test tests/FormAtlas.Tool.Tests/ -c Release --no-build
