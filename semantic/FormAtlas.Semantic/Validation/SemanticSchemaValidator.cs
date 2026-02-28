@@ -9,7 +9,7 @@ namespace FormAtlas.Semantic.Validation
     /// <summary>
     /// Validates JSON text against the semantic bundle JSON schema (Draft 2020-12).
     /// </summary>
-    public sealed class SemanticSchemaValidator
+    public sealed class SemanticSchemaValidator : ISchemaValidator
     {
         private readonly JsonSchema _schema;
 

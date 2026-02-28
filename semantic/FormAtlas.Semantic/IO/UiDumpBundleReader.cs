@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using FormAtlas.Semantic.Validation;
 using Newtonsoft.Json.Linq;
 
 namespace FormAtlas.Semantic.IO
@@ -9,9 +10,9 @@ namespace FormAtlas.Semantic.IO
     /// </summary>
     public sealed class UiDumpBundleReader
     {
-        private readonly FormAtlas.Semantic.Validation.SemanticSchemaValidator? _validator;
+        private readonly ISchemaValidator? _validator;
 
-        public UiDumpBundleReader(FormAtlas.Semantic.Validation.SemanticSchemaValidator? validator = null)
+        public UiDumpBundleReader(ISchemaValidator? validator = null)
         {
             _validator = validator;
         }

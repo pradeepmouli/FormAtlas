@@ -44,7 +44,7 @@ figma.ui.onmessage = async (rawMsg: unknown) => {
       ok: summary.ok,
       createdNodeIds: summary.createdNodeIds,
       warnings: summary.warnings,
-      error: summary.error,
+      ...(summary.error !== undefined && { error: summary.error }),
     };
     figma.ui.postMessage(reply);
     return;

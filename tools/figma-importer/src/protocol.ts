@@ -54,7 +54,7 @@ export interface ValidateResult {
   ok: boolean;
   schemaVersion?: string;
   form?: { name: string; width: number; height: number };
-  counts?: { nodes: number; devexpressKinds: string[] | number };
+  counts?: { nodes: number; devexpressKinds: string[] };
   warnings: Warning[];
   error?: string;
 }

@@ -52,9 +52,16 @@ namespace FormAtlas.Tool.Exporter
                 Dpi = dpi
             };
 
-            // Create output directory
+            // Create output directory — sanitize formName to prevent path traversal
+            var safeName = SanitizeFileName(formName);
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd-HHmmss");
-            var bundleDir = Path.Combine(_options.OutputDirectory, $"{formName}-{timestamp}");
+            var outputDirFull = Path.GetFullPath(_options.OutputDirectory);
+            var bundleDir = Path.GetFullPath(
+                Path.Combine(outputDirFull, $"{safeName}-{timestamp}"));
+            // Require bundleDir to be a direct subdirectory of outputDirFull
+            if (!bundleDir.StartsWith(outputDirFull + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+                throw new InvalidOperationException(
+                    "Bundle directory would escape the configured OutputDirectory.");
             Directory.CreateDirectory(bundleDir);
 
             // Walk controls
@@ -82,6 +89,16 @@ namespace FormAtlas.Tool.Exporter
 
             _writer.Write(bundle, bundleDir);
             return bundleDir;
+        }
+
+        private static string SanitizeFileName(string name)
+        {
+            var invalid = Path.GetInvalidFileNameChars();
+            var sb = new System.Text.StringBuilder(name.Length);
+            foreach (var c in name)
+                sb.Append(Array.IndexOf(invalid, c) >= 0 ? '_' : c);
+            var result = sb.ToString().Trim();
+            return result.Length == 0 ? "form" : result;
         }
 
         private static string? GetString(object obj, string prop) =>

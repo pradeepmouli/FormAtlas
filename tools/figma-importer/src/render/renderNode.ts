@@ -12,7 +12,7 @@ const registry = DevExpressRendererRegistry.createDefault();
 
 export function renderNode(
   node: UiNode,
-  parent: FrameNode | GroupNode | PageNode,
+  parent: FrameNode,
   options: ImportOptions,
   depth = 0
 ): SceneNode {
@@ -21,14 +21,14 @@ export function renderNode(
     const renderer = registry.getRenderer(node.metadata.devexpress.kind);
     if (renderer) {
       const rendered = renderer.render(node, options);
-      (parent as FrameNode).appendChild(rendered);
+      parent.appendChild(rendered);
       return rendered;
     }
   }
 
   // Generic frame rendering
   const frame = createNodeFrame(node, options);
-  (parent as FrameNode).appendChild(frame);
+  parent.appendChild(frame);
 
   const sorted = sortByZOrder(node.children ?? []);
   for (const child of sorted) {

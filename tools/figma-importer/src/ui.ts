@@ -79,6 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   importBtn?.addEventListener("click", () => {
     if (!jsonText) { showStatus("No JSON loaded.", true); return; }
-    postMessage({ type: "IMPORT_REQUEST", jsonText, pngBytes, options: currentOptions });
+    postMessage({ type: "IMPORT_REQUEST", jsonText, ...(pngBytes !== undefined && { pngBytes }), options: currentOptions });
   });
 });
