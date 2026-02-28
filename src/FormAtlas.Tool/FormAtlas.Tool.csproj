@@ -5,7 +5,7 @@
     <PackageId>FormAtlas.Tool</PackageId>
     <Version>0.1.0</Version>
     <Authors>pmouli</Authors>
-    <Description>FormAtlas reusable .NET Framework 4.8 library.</Description>
+    <Description>FormAtlas reusable .NET library targeting .NET Standard 2.0 and .NET Framework 4.8.</Description>
   </PropertyGroup>
 
   <PropertyGroup>
