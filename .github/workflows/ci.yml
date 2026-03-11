@@ -14,7 +14,7 @@ jobs:
       semVer: ${{ steps.gitversion.outputs.semVer }}
       nuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: gitversion
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -78,7 +78,7 @@ jobs:
       run:
         working-directory: tools/figma-importer
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -104,7 +104,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
           fetch-depth: 0
