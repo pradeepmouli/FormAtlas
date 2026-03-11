@@ -15,6 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3
+        with:
+          versionSpec: "6.x"
+
+      - name: Execute GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -25,7 +36,9 @@ jobs:
         run: dotnet restore FormAtlas.sln
 
       - name: Build (Release)
-        run: dotnet build FormAtlas.sln -c Release --no-restore
+        run: >
+          dotnet build FormAtlas.sln -c Release --no-restore
+          /p:Version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
       - name: Test
         run: dotnet test tests/FormAtlas.Tool.Tests/ -c Release --no-build
@@ -35,7 +48,7 @@ jobs:
           dotnet pack src/FormAtlas.Tool/FormAtlas.Tool.csproj
           -c Release --no-build
           -o ./nupkg
-          /p:PackageVersion=${GITHUB_REF_NAME#v}
+          /p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}
 
       - name: Publish to GitHub Packages
         run: >
@@ -55,6 +68,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v3
+        with:
+          versionSpec: "6.x"
+
+      - name: Execute GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v3
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -68,12 +92,14 @@ jobs:
         run: >
           dotnet publish semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj
           -c Release -r linux-x64 --self-contained true
+          /p:Version=${{ steps.gitversion.outputs.semVer }}
           -o ./publish/semantic-linux-x64
 
       - name: Publish self-contained CLI (win-x64)
         run: >
           dotnet publish semantic/FormAtlas.Semantic/FormAtlas.Semantic.csproj
           -c Release -r win-x64 --self-contained true
+          /p:Version=${{ steps.gitversion.outputs.semVer }}
           -o ./publish/semantic-win-x64
 
       - name: Zip CLI artifacts

@@ -1,0 +1,8 @@
+mode: Mainline
+tagPrefix: 'v'
+assemblyVersioningScheme: MajorMinorPatch
+nextVersion: 0.1.0
+majorVersionBumpMessage: '(?s)feat\(!|\)!:|BREAKING CHANGE:'
+minorVersionBumpMessage: '^feat:'
+patchVersionBumpMessage: '^(fix|perf):'
+noBumpMessage: '^(chore|docs|ci|test|style|refactor):'

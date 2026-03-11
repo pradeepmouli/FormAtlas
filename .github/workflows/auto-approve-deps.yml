@@ -1,0 +1,59 @@
+name: Triage Dependency Updates
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  triage:
+    name: Auto-approve and request Copilot triage
+    runs-on: ubuntu-latest
+    if: |
+      github.actor == 'dependabot[bot]' ||
+      github.actor == 'renovate[bot]'
+    steps:
+      - name: Auto-approve
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Request Copilot as reviewer
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit "${{ github.event.pull_request.number }}" \
+            --repo "${{ github.repository }}" \
+            --add-reviewer "copilot"
+
+      - name: Post Copilot triage instructions
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const sep = '---';
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: [
+                '@copilot Please evaluate this dependency update PR and provide a triage summary.',
+                '',
+                'Check the following and summarize your findings:',
+                '',
+                '1. **Impact**: Does this update affect `FormAtlas.Tool` (NuGet package), `FormAtlas.Semantic` CLI, or the `figma-importer` plugin?',
+                '2. **Breaking changes**: Review the dependency changelog for breaking changes. Check if any public API used in `src/` or `semantic/` has changed.',
+                '3. **Test coverage**: Do the existing tests in `tests/FormAtlas.Tool.Tests/`, `tests/FormAtlas.Semantic.Tests/`, or `tests/Integration/` cover the updated code paths?',
+                '4. **Security**: Is this update fixing a CVE or security advisory? If so, note the severity.',
+                '5. **Recommendation**: Should this be merged as-is, merged with a patch bump in the next release, or held pending investigation?',
+                '',
+                'If this update introduces a user-visible change (bug fix, new capability) that warrants a version bump, please note that in your summary.',
+                '',
+                sep,
+                'This PR was auto-approved to satisfy branch protection. **Do not auto-merge** — a human will review your analysis and decide.',
+              ].join('\n')
+            });
