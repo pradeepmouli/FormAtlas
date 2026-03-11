@@ -58,7 +58,7 @@ jobs:
           --skip-duplicate
 
       - name: Upload NuGet artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nupkg
           path: ./nupkg/*.nupkg
@@ -109,7 +109,7 @@ jobs:
           zip -r semantic-win-x64.zip semantic-win-x64/
 
       - name: Upload CLI artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: semantic-cli
           path: ./publish/*.zip
@@ -147,7 +147,7 @@ jobs:
           zip -j ../../figma-importer-plugin.zip dist/main.js dist/ui.js
 
       - name: Upload plugin artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: figma-importer-plugin
           path: figma-importer-plugin.zip
